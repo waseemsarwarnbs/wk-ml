@@ -116,8 +116,8 @@ view: case_information {
   dimension: end_month_to_diposition {
     type: string
     sql: ${TABLE}.end_month;;
-#     drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed ]
-    drill_fields: [sum_of_dispositions]
+    drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed ]
+#     drill_fields: [sum_of_dispositions,count]
   }
 
   measure: count {
