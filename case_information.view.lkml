@@ -50,6 +50,12 @@ view: case_information {
     type: string
     sql: ${TABLE}.judge ;;
   }
+  dimension: judge_to_disposition {
+    type: string
+    sql: ${TABLE}.judge ;;
+    drill_fields: [sum_of_dispositions]
+
+  }
 
   dimension: judge_type {
     type: string
@@ -101,13 +107,54 @@ view: case_information {
     sql: ${TABLE}.total_occurance ;;
   }
 
+  dimension: end_year_to_end_month {
+    type: string
+    sql: ${TABLE}.end_year ;;
+    drill_fields: [end_month_to_diposition,]
+  }
+
+  dimension: end_month_to_diposition {
+    type: string
+    sql: ${TABLE}.end_month;;
+#     drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed ]
+    drill_fields: [sum_of_dispositions]
+  }
+
   measure: count {
     type: count
     drill_fields: [filename]
+  }
+
+  measure: count_simple {
+    type: count
   }
 
   measure: average_case_duration_in_months {
     type:  average
     sql:  ${TABLE}.duration_in_months;;
   }
+  dimension: sum_of_dispositions {
+    type:  number
+    sql:sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed ;;
+#     sql: ${TABLE}.affirmed,${TABLE}.dismissed,${TABLE}.remand,${TABLE}.reversed;;
+
+  }
+  measure: sum_of_cases_affirmed {
+    type:  sum
+    sql:  ${TABLE}.affirmed;;
+  }
+  measure: sum_of_cases_dismissed {
+    type:  sum
+    sql:  ${TABLE}.dismissed;;
+  }
+  measure: sum_of_cases_remand {
+    type:  sum
+    sql:  ${TABLE}.remand;;
+  }
+  measure: sum_of_cases_reversed {
+    type:  sum
+    sql:  ${TABLE}.reversed;;
+  }
+
+
 }
