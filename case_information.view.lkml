@@ -1,5 +1,5 @@
 view: case_information {
-  sql_table_name: wkml.case_information ;;
+  sql_table_name: case_information ;;
 
   dimension: affirmed {
     type: number
