@@ -7,3 +7,4 @@ include: "*.view"
 include: "*.dashboard"
 
 explore: case_information {}
+explore: case_data_variation {}

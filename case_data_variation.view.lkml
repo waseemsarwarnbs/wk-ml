@@ -6,14 +6,14 @@ view: case_data_variation {
     sql: ${TABLE}.document_type ;;
   }
 
-  dimension: no_of_files {
-    type: number
-    sql: ${TABLE}.no_of_files ;;
-  }
-
   dimension: percentage {
     type: string
     sql: ${TABLE}.percentage ;;
+  }
+
+  measure: no_of_files {
+    type: number
+    sql: ${TABLE}.no_of_files ;;
   }
 
   measure: count {
