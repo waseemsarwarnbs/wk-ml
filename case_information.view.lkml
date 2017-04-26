@@ -107,26 +107,35 @@ view: case_information {
     sql: ${TABLE}.total_occurance ;;
   }
 
-  dimension: end_year_to_end_month {
+  dimension: cases_per_year {
     type: string
     sql: ${TABLE}.end_year ;;
-    drill_fields: [end_month_to_diposition,]
   }
 
-  dimension: end_month_to_diposition {
+  dimension: cases_per_month {
     type: string
     sql: ${TABLE}.end_month;;
-    drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed ]
-#     drill_fields: [sum_of_dispositions,count]
+
+  }
+
+  measure: count_per_year {
+    type: count
+    drill_fields: [cases_per_month,count_per_month]
+  }
+
+  measure: count_per_month {
+    type: count
+    drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed]
+  }
+
+  measure: number_of_cases {
+    type: count
+    drill_fields: [sum_of_cases_affirmed,sum_of_cases_dismissed,sum_of_cases_remand,sum_of_cases_reversed]
   }
 
   measure: count {
     type: count
     drill_fields: [filename]
-  }
-
-  measure: count_simple {
-    type: count
   }
 
   measure: average_case_duration_in_months {
@@ -155,6 +164,4 @@ view: case_information {
     type:  sum
     sql:  ${TABLE}.reversed;;
   }
-
-
 }
